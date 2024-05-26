@@ -55,10 +55,9 @@ def SeriesAddView(request):
 
         reqUrl = f"https://api.themoviedb.org/3/tv/{tmdb_id}?language=en-US"
 
-        tmdb_token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MjkzYzUxOWE3NzMyMTUyZmI5ZmM2ODE2MDQ1NWQ2MyIsInN1YiI6IjY1ZjBhMzMxM2RjODg1MDE4NWM1N2FiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fkG3gvPCgCDYyAizw914tVP9ieerdZTQM9tanKUBFlo'
         headersList = {
         "accept": "application/json",
-        "Authorization": f"Bearer {tmdb_token}"
+        "Authorization": f"Bearer {org.tmdb_token}"
         }
 
         payload = ""
@@ -129,7 +128,7 @@ def SeriesAddView(request):
             for season_data in seasons:
                 season_number = season_data.get("season_number")
                 if season_number:
-                    add_season(tmdb_id, season_number, tmdb_token)
+                    add_season(tmdb_id, season_number, org.tmdb_token)
         else:
             messages.success(request, 'Request was not successful. Status code:', series_details.status_code)
 
