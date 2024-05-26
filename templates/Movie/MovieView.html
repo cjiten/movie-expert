@@ -1,0 +1,243 @@
+{% extends 'Base.html' %}
+
+{% block content %}
+
+<head>
+  {% comment %} head {% endcomment %}
+  {% include 'Components/Head.html' %}
+
+  <title>Movies - {{ Web.name }}</title>
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Movies - {{ Web.name }}">
+  <meta name="description"
+    content="Experience movie magic at Movie Expert! Your gateway to a world of cinematic treasures, from blockbusters to hidden gems, all at your fingertips.">
+  <meta name="keywords"
+    content="all movies hub, web series, movie rulz, movierulz tv, ibomma telugu movies, ibomma movies, ibomma telugu movies new 2022, movie s, hd hub, movierulz 2023, movies verse, skymovies hd, movie rulz 2023, sexiest movies, hd movies, movie hub, movies download, hindi movie, full movies, new movie download, hd movies download, hollywood movies, mkv movies, english movie, new movies 2023, web series hindi, movies download website, movie download site, watch movies, hd today tv, best movies to watch, best movies, best new movies, hd movies hub, filmy world, new hindi movie, best new films, mkv cinemas, 7 star movies, 7 movies, new south movie, web series download, hd hub movie, ibomma telugu movies download, movierulz ms, ibomma telugu movies free download, telugu movierulz, ibomma telugu movies new 2022 download free, ibomma telugu movies new, english movie film, south movies, ibomma hindi movies, english movie english movie, movies 2023 download, animal full movies, web movie download, ola movies, new hot web series, best of movies to watch, download animal movie, hollywood movies download, watch online movie, movies online, hollywood movies download in hindi, movies download free, 4k movies, download movies free, free movie download sites for mobile, download new movies for free, new hollywood movies, film download, watch movies free online, hollywood ki movie, newly released movies, movies free, pathan movie download, watch online, zee movies, hollywood movie download website, movie film, drishyam 2 full movie, old movies, free full movies, movies website, pathan full movie, full movie download, action movie, online movies website, latest hollywood movies, free movies website, yashoda full movie, kgf 2 full movie, online movies hindi, watch online movie free sites, watch movies free, good movies, recently released movies, movies 7, movies for you, movie site">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="author" content="{{ Web.name }}">
+
+  <meta property="article:tag" content="web series" />
+  <meta property="article:tag" content="movie rulz" />
+  <meta property="article:tag" content="movierulz tv" />
+  <meta property="article:tag" content="ibomma telugu movies" />
+  <meta property="article:tag" content="ibomma movies" />
+  <meta property="article:tag" content="ibomma telugu movies new 2022" />
+  <meta property="article:tag" content="movie s" />
+  <meta property="article:tag" content="hd hub" />
+  <meta property="article:tag" content="movierulz 2023" />
+  <meta property="article:tag" content="movies verse" />
+  <meta property="article:tag" content="skymovies hd" />
+  <meta property="article:tag" content="movie rulz 2023" />
+  <meta property="article:tag" content="sexiest movies" />
+  <meta property="article:tag" content="hd movies" />
+  <meta property="article:tag" content="movie hub" />
+  <meta property="article:tag" content="movies download" />
+  <meta property="article:tag" content="hindi movie" />
+  <meta property="article:tag" content="full movies" />
+  <meta property="article:tag" content="new movie download" />
+  <meta property="article:tag" content="hd movies download" />
+  <meta property="article:tag" content="hollywood movies" />
+  <meta property="article:tag" content="mkv movies" />
+  <meta property="article:tag" content="english movie" />
+  <meta property="article:tag" content="new movies 2023" />
+  <meta property="article:tag" content="web series hindi" />
+  <meta property="article:tag" content="movies download website" />
+  <meta property="article:tag" content="movie download site" />
+  <meta property="article:tag" content="watch movies" />
+  <meta property="article:tag" content="hd today tv" />
+  <meta property="article:tag" content="best movies to watch" />
+  <meta property="article:tag" content="best movies" />
+  <meta property="article:tag" content="best new movies" />
+  <meta property="article:tag" content="hd movies hub" />
+  <meta property="article:tag" content="filmy world" />
+  <meta property="article:tag" content="new hindi movie" />
+  <meta property="article:tag" content="best new films" />
+  <meta property="article:tag" content="mkv cinemas" />
+  <meta property="article:tag" content="7 star movies" />
+  <meta property="article:tag" content="7 movies" />
+  <meta property="article:tag" content="new south movie" />
+  <meta property="article:tag" content="web series download" />
+  <meta property="article:tag" content="hd hub movie" />
+  <meta property="article:tag" content="ibomma telugu movies download" />
+  <meta property="article:tag" content="movierulz ms" />
+  <meta property="article:tag" content="ibomma telugu movies free download" />
+  <meta property="article:tag" content="telugu movierulz" />
+  <meta property="article:tag" content="ibomma telugu movies new 2022 download free" />
+  <meta property="article:tag" content="ibomma telugu movies new" />
+  <meta property="article:tag" content="english movie film" />
+  <meta property="article:tag" content="south movies" />
+  <meta property="article:tag" content="ibomma hindi movies" />
+  <meta property="article:tag" content="english movie english movie" />
+  <meta property="article:tag" content="movies 2023 download" />
+  <meta property="article:tag" content="animal full movies" />
+  <meta property="article:tag" content="web movie download" />
+  <meta property="article:tag" content="ola movies" />
+  <meta property="article:tag" content="new hot web series" />
+  <meta property="article:tag" content="best of movies to watch" />
+  <meta property="article:tag" content="download animal movie" />
+  <meta property="article:tag" content="hollywood movies download" />
+  <meta property="article:tag" content="watch online movie" />
+  <meta property="article:tag" content="movies online" />
+  <meta property="article:tag" content="hollywood movies download in hindi" />
+  <meta property="article:tag" content="movies download free" />
+  <meta property="article:tag" content="4k movies" />
+  <meta property="article:tag" content="download movies free" />
+  <meta property="article:tag" content="free movie download sites for mobile" />
+  <meta property="article:tag" content="download new movies for free" />
+  <meta property="article:tag" content="new hollywood movies" />
+  <meta property="article:tag" content="film download" />
+  <meta property="article:tag" content="watch movies free online" />
+  <meta property="article:tag" content="hollywood ki movie" />
+  <meta property="article:tag" content="newly released movies" />
+  <meta property="article:tag" content="movies free" />
+  <meta property="article:tag" content="pathan movie download" />
+  <meta property="article:tag" content="watch online" />
+  <meta property="article:tag" content="zee movies" />
+  <meta property="article:tag" content="hollywood movie download website" />
+  <meta property="article:tag" content="movie film" />
+  <meta property="article:tag" content="drishyam 2 full movie" />
+  <meta property="article:tag" content="old movies" />
+  <meta property="article:tag" content="free full movies" />
+  <meta property="article:tag" content="movies website" />
+  <meta property="article:tag" content="pathan full movie" />
+  <meta property="article:tag" content="full movie download" />
+  <meta property="article:tag" content="action movie" />
+  <meta property="article:tag" content="online movies website" />
+  <meta property="article:tag" content="latest hollywood movies" />
+  <meta property="article:tag" content="free movies website" />
+  <meta property="article:tag" content="yashoda full movie" />
+  <meta property="article:tag" content="kgf 2 full movie" />
+  <meta property="article:tag" content="online movies hindi" />
+  <meta property="article:tag" content="watch online movie free sites" />
+  <meta property="article:tag" content="watch movies free" />
+  <meta property="article:tag" content="good movies" />
+  <meta property="article:tag" content="recently released movies" />
+  <meta property="article:tag" content="movies 7" />
+  <meta property="article:tag" content="movies for you" />
+  <meta property="article:tag" content="movie site" />
+
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ Web.url }}">
+  <meta property="og:title" content="Movies - {{ Web.name }}">
+  <meta property="og:description"
+    content="Experience movie magic at Movie Expert! Your gateway to a world of cinematic treasures, from blockbusters to hidden gems, all at your fingertips.">
+  <meta property="og:image" content="{{ Web.url }}{{ Web.preview_img.url }}">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ Web.url }}">
+  <meta property="twitter:title" content="Movies - {{ Web.name }}">
+  <meta property="twitter:description"
+    content="Experience movie magic at Movie Expert! Your gateway to a world of cinematic treasures, from blockbusters to hidden gems, all at your fingertips.">
+  <meta property="twitter:image" content="{{ Web.url }}{{ Web.preview_img.url }}">
+
+</head>
+
+<body class="bg-white dark:bg-gray-900">
+  {% comment %} header {% endcomment %}
+  {% include 'Components/Navbar.html' %}
+  <div class="antialiased bg-gray-50 dark:bg-gray-900">
+
+    <section class="bg-white dark:bg-gray-900">
+      <div class="py-5 px-5 mx-auto max-w-screen-xl sm:py-4 lg:px-6">
+        <form method="GET" action="{% url 'MovieView' %}">
+          <label for="default-search"
+            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <input type="search" id="search" name="keyword"
+              class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-{{ Web.color }}-500 focus:border-{{ Web.color }}-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-{{ Web.color }}-500 dark:focus:border-{{ Web.color }}-500"
+              placeholder="Search...">
+            <button type="submit"
+              class="text-white absolute right-2.5 bottom-2.5 bg-{{ Web.color }}-700 hover:bg-{{ Web.color }}-800 focus:ring-4 focus:outline-none focus:ring-{{ Web.color }}-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-{{ Web.color }}-600 dark:hover:bg-{{ Web.color }}-700 dark:focus:ring-{{ Web.color }}-800">Search</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="text-gray-400 body-font bg-gray-900">
+      <div class="container px-5 py-6 mx-auto">
+        <div class="flex flex-wrap w-full mb-10">
+          <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">Movies</h1>
+            <div class="h-1 w-20 bg-{{ Web.color}}-500 rounded"></div>
+          </div>
+        </div>
+        <div class="flex flex-wrap -m-4">
+
+          {% for Movie in Movies %}
+          <div class="xl:w-1/5 md:w-1/3 p-4">
+            <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+              <a href="{{ Movie.get_absolute_url }}">
+                <img class="h-50 rounded w-full object-cover object-center mb-2" src="{{ Movie.poster_path.url }}"
+                  alt="content">
+                <div class="flex flex-wrap gap-2 py-2">
+                  {% for genre in Movie.genre.all %}
+                  <span
+                    class="tracking-widest text-{{ Web.color}}-400 text-xs font-medium title-font border rounded-lg border-{{ Web.color}}-400 p-1">{{ genre.name }}</span>
+                  {% endfor %}
+                </div>
+                <h2 class="text-lg text-white font-medium title-font">{{ Movie.title }}{% if Movie.title != Movie.original_title %} ({{ Movie.original_title }}){% endif %} {{ Movie.release_date|slice:'0:4' }}
+                </h2>
+                <p class="leading-relaxed text-base">Updated on {{ Movie.updated_date }}</p>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white dark:bg-gray-900">
+      <nav aria-label="Page navigation" class="flex justify-center py-3">
+        <ul class="inline-flex space-x-2">
+          {% if Movies.has_previous %}
+          <li><a href="?page={{ Movies.previous_page_number }}"><button
+                class="flex items-center justify-center w-10 h-10 rounded-full text-{{ Web.color }}-700 hover:text-white hover:bg-{{ Web.color }}-800 font-medium dark:text-{{ Web.color }}-600 dark:hover:bg-{{ Web.color }}-700">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                  <path
+                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                    clip-rule="evenodd" fill-rule="evenodd"></path>
+                </svg></button></a>
+          </li>
+          {% endif %}
+          {% if Movies.has_previous %}
+          <li><a href="?page={{ Movies.number|add:'-1' }}"><button
+                class="w-10 h-10 rounded-full text-{{ Web.color }}-700 hover:text-white hover:bg-{{ Web.color }}-800 font-medium dark:text-{{ Web.color }}-600 dark:hover:bg-{{ Web.color }}-700">
+                {{ Movies.number|add:'-1' }}</button></a>
+          </li>
+          {% endif %}
+          <li><button
+              class="w-10 h-10 rounded-full text-white bg-{{ Web.color }}-700 hover:bg-{{ Web.color }}-800 font-medium dark:bg-{{ Web.color }}-600 dark:hover:bg-{{ Web.color }}-700">
+              {{ Movies.number }}</button>
+          </li>
+          {% if Movies.has_next %}
+          <li><a href="?page={{ Movies.number|add:'+1' }}"><button
+                class="w-10 h-10 rounded-full text-{{ Web.color }}-700 hover:text-white hover:bg-{{ Web.color }}-800 font-medium dark:text-{{ Web.color }}-600 dark:hover:bg-{{ Web.color }}-700">
+                {{ Movies.number|add:'+1' }}</button></a>
+          </li>
+          {% endif %}
+          {% if Movies.has_next %}
+          <li><a href="?page={{ Movies.next_page_number }}"><button
+                class="flex items-center justify-center w-10 h-10 rounded-full text-{{ Web.color }}-700 hover:text-white hover:bg-{{ Web.color }}-800 font-medium dark:text-{{ Web.color }}-600 dark:hover:bg-{{ Web.color }}-700">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                  <path
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd" fill-rule="evenodd"></path>
+                </svg></button></a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </section>
+    {% endblock %}

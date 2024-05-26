@@ -1,0 +1,106 @@
+{% extends 'Base.html' %}
+
+{% block content %}
+<head>
+  {% comment %} head {% endcomment %}
+  {% include 'Components/Head.html' %}
+  
+  <title>{{ SeasonDetail.title }}{% if SeasonDetail.title != SeasonDetail.original_title %} ({{ SeasonDetail.original_title }}){% endif %} Hindi Movie 480p 720p 1080p 2160p - {{ Web.name }}</title>
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="{{ SeasonDetail.title }}{% if SeasonDetail.title != SeasonDetail.original_title %} ({{ SeasonDetail.original_title }}){% endif %} Hindi Movie 480p 720p 1080p 2160p - {{ Web.name }}">
+  <meta name="description" content="{{ SeasonDetail.overview }}">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="author" content="{{ Web.name }}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ Web.url }}{{ SeasonDetail.get_absolute_url }}">
+  <meta property="og:title" content="{{ SeasonDetail.title }}{% if SeasonDetail.title != SeasonDetail.original_title %} ({{ SeasonDetail.original_title }}){% endif %} Hindi Movie 480p 720p 1080p 2160p">
+  <meta property="og:description" content="{{ SeasonDetail.overview }}">
+  <meta property="og:image" content="{{ Web.url }}{{ SeasonDetail.poster_path.url }}">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ Web.url }}{{ SeasonDetail.get_absolute_url }}">
+  <meta property="twitter:title" content="{{ SeasonDetail.title }}{% if SeasonDetail.title != SeasonDetail.original_title %} ({{ SeasonDetail.original_title }}){% endif %} Hindi Movie 480p 720p 1080p 2160p">
+  <meta property="twitter:description" content="{{ SeasonDetail.overview }}">
+  <meta property="twitter:image" content="{{ Web.url }}{{ SeasonDetail.poster_path.url }}">
+
+</head>
+<body class="bg-white dark:bg-gray-900">
+{% comment %} header {% endcomment %}
+{% include 'Components/Navbar.html' %}
+<div class="antialiased bg-gray-50 dark:bg-gray-900">
+
+<section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
+    <div class="container px-5 pt-8 pb-5 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap">
+        <img class="lg:w-1/3 md:w-1/2 w-full h-min mt-6 object-cover object-center rounded" src="{{ SeasonDetail.poster_path.url }}">
+        <div class="lg:w-2/3 md:w-1/2 w-full lg:pl-10 lg:py-6 md:pl-10 md:my-6 mt-6 lg:mt-0">
+          <h1 class="text-white text-3xl title-font font-medium my-2">{{ SeriesDetail.title }}{% if SeriesDetail.title != SeriesDetail.original_title %} ({{ SeriesDetail.original_title }}){% endif %} {{ SeasonDetail.title }} {{ SeasonDetail.release_date|slice:'0:4' }}</h1>
+          <div class="flex mb-4">
+            <span class="flex flex-wrap py-2 gap-2">
+                {% for genres in SeasonDetail.genre.all %}
+                <a href="{{ genres.get_absolute_url }}" class="tracking-widest text-{{ Web.color}}-400 text-sm font-medium title-font p-2 border rounded-lg border-{{ Web.color}}-400">{{ genres.name }}</a>
+                {% endfor %}
+                {% for category in SeasonDetail.category.all %}
+                <a href="{{ category.get_absolute_url }}" class="tracking-widest text-{{ Web.color}}-400 text-sm font-medium title-font p-2 border rounded-lg border-{{ Web.color}}-400">{{ category.name }}</a>
+                {% endfor %}
+                <h2 class="tracking-widest text-{{ Web.color}}-400 text-sm font-medium title-font p-2 border rounded-lg border-{{ Web.color}}-400">Release date: {{ SeasonDetail.release_date }}</h2>
+            </span>
+          </div>
+          <p class="leading-relaxed mb-4">{{ SeriesDetail.title }}{% if SeriesDetail.title != SeriesDetail.original_title %} ({{ SeriesDetail.original_title }}){% endif %} {{ SeasonDetail.title }} {{ SeasonDetail.release_date|slice:'0:4' }} Overview: {{ SeasonDetail.overview }}</p>
+          <div class="w-full mx-auto overflow-auto">
+          </div>
+          <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-800 mb-5">
+              <p class="title-font font-medium text-2xl text-white"></p>
+          </div>
+          <div class="flex">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="text-gray-400 body-font bg-gray-900">
+    <div class="container py-24 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap -m-4">
+        {% for Episode in Episodes %}
+        <div class="xl:w-1/3 md:w-1/2 p-4">
+          <a href="">
+            <div class="bg-gray-800 bg-opacity-40 rounded-lg">
+              <img class="h-full rounded w-full object-cover object-center mb-4" src="{{ Episode.poster_path.url }}"
+                alt="content">
+              <h3 class="tracking-widest text-green-400 text-xs font-medium title-font px-4">{{ Episode.runtime }}min</h3>
+              <h2 class="text-lg text-white font-medium title-font pb-4 px-4">{{ Episode.title }}</h2>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% if Web.link_section == True %}
+  <section class="text-gray-400 bg-gray-900 body-font mt-5">
+    <div class="container px-5 pt-5 pb-5 mx-auto">
+      <div class="text-center mb-10">
+        <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-white mb-4">{{ SeasonDetail.title }} Movie
+          Download Links</h1>
+        <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">{{ SeasonDetail.title }} Full Movie Download in
+          480p, 720p & 1080p</p>
+      </div>
+      <div class="lg:w-2/3 w-full mx-auto grid gap-8 grid-col-1 items-center justify-center">
+        {% for Link in SeasonDetail.link_set.all %}
+          <a href="{{ Link.get_absolute_url }}" rel="nofollow noreferrer noopener" target="_blank" class="bg-gray-800 rounded flex p-4 m-4 h-full items-center">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+            class="text-{{ Web.color}}-400 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+            <path d="M22 4L12 14.01l-3-3"></path>
+          </svg>
+          <p class="title-font font-medium text-white">{{ Link.name }}</p>
+        </a>
+        {% endfor %}
+      </div>
+  </section>
+  {% endif %}
+{% endblock %}
