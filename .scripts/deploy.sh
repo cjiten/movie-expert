@@ -33,6 +33,6 @@ echo "Virtual env 'env' Deactivated !"
 
 echo "Reloading App..."
 # Restart uwsgi
-systemctl restart uwsgi
+sudo systemctl restart uwsgi
 
 echo "Deployment Finished !"
