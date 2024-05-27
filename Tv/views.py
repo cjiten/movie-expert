@@ -3,8 +3,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from Settings.models import Org
-from Spec.models import Genre
 from Tv.models import Series, Season, Episode
+from Spec.models import Genre
 
 import os
 import requests
