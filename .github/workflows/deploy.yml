@@ -20,5 +20,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSHKEY }}
           script: |
-            cd ~/htdocs/www.movieexpert.xyz/movie-expert
+            cd ~/htdocs/www.movieexpert.xyz
             ./.scripts/deploy.sh
