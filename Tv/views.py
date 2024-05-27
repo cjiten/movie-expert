@@ -57,12 +57,12 @@ def SeriesAddView(request):
 
         headersList = {
         "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NmZjYmZhNjgyMzg3YWJmMmNlYzYxMjBmNzQwNGQ4ZCIsInN1YiI6IjY1ZjBhMzMxM2RjODg1MDE4NWM1N2FiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MH80AyvCBZfBByZMBMCkxll3HT9FWH66HRrNBPUrv8I"
+        "Authorization": f"Bearer {org.tmdb_token}"
         }
 
         payload = ""
 
-        series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
+        series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList, timeout=10)
         update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
 
         if series_details.status_code == 200:
@@ -141,10 +141,10 @@ def add_season(tmdb_id, season_number, tmdb_token):
     
     headersList = {
         "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NmZjYmZhNjgyMzg3YWJmMmNlYzYxMjBmNzQwNGQ4ZCIsInN1YiI6IjY1ZjBhMzMxM2RjODg1MDE4NWM1N2FiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MH80AyvCBZfBByZMBMCkxll3HT9FWH66HRrNBPUrv8I"
+        "Authorization": f"Bearer {tmdb_token}"
     }
 
-    response = requests.get(reqUrl, headers=headersList)
+    response = requests.get(reqUrl, headers=headersList, timeout=10)
     
     if response.status_code == 200:
         data = response.json()
