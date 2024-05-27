@@ -62,7 +62,7 @@ def SeriesAddView(request):
 
         payload = ""
 
-        series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList, timeout=10)
+        series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
         update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
 
         if series_details.status_code == 200:
@@ -144,7 +144,7 @@ def add_season(tmdb_id, season_number, tmdb_token):
         "Authorization": f"Bearer {tmdb_token}"
     }
 
-    response = requests.get(reqUrl, headers=headersList, timeout=10)
+    response = requests.get(reqUrl, headers=headersList)
     
     if response.status_code == 200:
         data = response.json()
