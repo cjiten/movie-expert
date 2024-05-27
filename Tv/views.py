@@ -57,7 +57,7 @@ def SeriesAddView(request):
 
         headersList = {
         "accept": "application/json",
-        "Authorization": f"Bearer {org.tmdb_token}"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NmZjYmZhNjgyMzg3YWJmMmNlYzYxMjBmNzQwNGQ4ZCIsInN1YiI6IjY1ZjBhMzMxM2RjODg1MDE4NWM1N2FiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MH80AyvCBZfBByZMBMCkxll3HT9FWH66HRrNBPUrv8I"
         }
 
         payload = ""
@@ -141,7 +141,7 @@ def add_season(tmdb_id, season_number, tmdb_token):
     
     headersList = {
         "accept": "application/json",
-        "Authorization": f"Bearer {tmdb_token}"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NmZjYmZhNjgyMzg3YWJmMmNlYzYxMjBmNzQwNGQ4ZCIsInN1YiI6IjY1ZjBhMzMxM2RjODg1MDE4NWM1N2FiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MH80AyvCBZfBByZMBMCkxll3HT9FWH66HRrNBPUrv8I"
     }
 
     response = requests.get(reqUrl, headers=headersList)
