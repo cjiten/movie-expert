@@ -56,81 +56,79 @@ def SeriesAddView(request):
         reqUrl = f"https://api.themoviedb.org/3/tv/{tmdb_id}?language=en-US"
 
         headersList = {
-        "accept": "application/json",
-        "Authorization": f"Bearer {org.tmdb_token}"
+            "accept": "application/json",
+            "Authorization": f"Bearer {org.tmdb_token}"
         }
 
-        payload = ""
+        try:
+            series_details = requests.get(reqUrl, headers=headersList, timeout=10)  # Set timeout
+            series_details.raise_for_status()  # Raise an error for bad status codes
 
-        series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
-        update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
+            update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
 
-        if series_details.status_code == 200:
-            data = series_details.json()
-            genre_data = data["genres"]
+            if series_details.status_code == 200:
+                data = series_details.json()
+                genre_data = data["genres"]
 
-            genre_list = []
-            for genre_data in genre_data:
-                genre_id = genre_data.get("id")
-                genre_name = genre_data.get("name")
-                if genre_id and genre_name:
-                    genre = Genre.objects.filter(genre_id=genre_id).exists()
-                    try:
-                        genre = Genre.objects.get(genre_id=genre_id)
-                    except Genre.DoesNotExist:
-                        genre = Genre.objects.create(genre_id=genre_id, name=genre_name)
-                    genre_list.append(genre)
+                genre_list = []
+                for genre in genre_data:
+                    genre_id = genre.get("id")
+                    genre_name = genre.get("name")
+                    if genre_id and genre_name:
+                        genre_obj, created = Genre.objects.get_or_create(genre_id=genre_id, defaults={'name': genre_name})
+                        genre_list.append(genre_obj)
 
-            # Check if the poster image already exists
-            img_path = data["poster_path"]
-            poster_path = f"media/posters/tv{img_path}"
-            if not os.path.exists(poster_path):
-                # Save the poster image locally
-                poster_url = "https://image.tmdb.org/t/p/original" + img_path
-                poster_response = requests.get(poster_url)
-                if poster_response.status_code == 200:
-                    with open(f"media/posters/tv/series{img_path}", 'wb') as f:
-                        f.write(poster_response.content)
+                # Check if the poster image already exists
+                img_path = data["poster_path"]
+                poster_path = f"media/posters/tv{img_path}"
+                if not os.path.exists(poster_path):
+                    # Save the poster image locally
+                    poster_url = "https://image.tmdb.org/t/p/original" + img_path
+                    poster_response = requests.get(poster_url, timeout=10)  # Set timeout
+                    if poster_response.status_code == 200:
+                        with open(poster_path, 'wb') as f:
+                            f.write(poster_response.content)
 
-            if update_series:
-                # Update the existing movie
-                update_series.adult = data["adult"]
-                update_series.title = data["name"]
-                update_series.original_title = data["original_name"]
-                update_series.overview = data["overview"]
-                update_series.release_date = data["first_air_date"]
-                update_series.status = data["status"]
-                update_series.tagline = data["tagline"]
-                update_series.type = data["type"]
-                update_series.poster_path = f"posters/tv/series{img_path}"
-                update_series.genre.clear()
-                update_series.genre.add(*genre_list)
-                update_series.save()
+                if update_series:
+                    # Update the existing series
+                    update_series.adult = data["adult"]
+                    update_series.title = data["name"]
+                    update_series.original_title = data["original_name"]
+                    update_series.overview = data["overview"]
+                    update_series.release_date = data["first_air_date"]
+                    update_series.status = data["status"]
+                    update_series.tagline = data["tagline"]
+                    update_series.type = data["type"]
+                    update_series.poster_path = f"posters/tv/series{img_path}"
+                    update_series.genre.set(genre_list)
+                    update_series.save()
+                else:
+                    # Create a new series
+                    create_series = Series.objects.create(
+                        tmdb_id=data["id"],
+                        adult=data["adult"],
+                        title=data["name"],
+                        original_title=data["original_name"],
+                        overview=data["overview"],
+                        release_date=data["first_air_date"],
+                        status=data["status"],
+                        tagline=data["tagline"],
+                        type=data["type"],
+                        poster_path=f"posters/tv/series{img_path}"
+                    )
+                    create_series.genre.set(genre_list)
+                    create_series.save()
+
+                # Add seasons for the series
+                seasons = data.get("seasons", [])
+                for season_data in seasons:
+                    season_number = season_data.get("season_number")
+                    if season_number:
+                        add_season(tmdb_id, season_number, org.tmdb_token)
             else:
-                # Create a new movie
-                create_series = Series.objects.create(
-                tmdb_id = data["id"],
-                adult = data["adult"],
-                title = data["name"],
-                original_title = data["original_name"],
-                overview = data["overview"],
-                release_date = data["first_air_date"],
-                status = data["status"],
-                tagline = data["tagline"],
-                type = data["type"],
-                poster_path = f"posters/tv/series{img_path}"
-                )
-                create_series.genre.add(*genre_list)
-                create_series.save()
-
-            # Add seasons for the series
-            seasons = data.get("seasons", [])
-            for season_data in seasons:
-                season_number = season_data.get("season_number")
-                if season_number:
-                    add_season(tmdb_id, season_number, org.tmdb_token)
-        else:
-            messages.success(request, 'Request was not successful. Status code:', series_details.status_code)
+                messages.error(request, f'Request was not successful. Status code: {series_details.status_code}')
+        except requests.exceptions.RequestException as e:
+            messages.error(request, f'Error occurred: {str(e)}')
 
         messages.success(request, 'Series Created Successfully')
         return render(request, 'Tv/SeriesAddView.html')
