@@ -80,6 +80,9 @@ def SeriesAddView(request):
                     except Genre.DoesNotExist:
                         genre = Genre.objects.create(genre_id=genre_id, name=genre_name)
                     genre_list.append(genre)
+        else:
+            # Request failed
+            messages.error(request, f"Request was not successful. Status code: {series_details.status_code}")
 
             # Check if the poster image already exists
             img_path = data["poster_path"]
