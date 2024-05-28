@@ -124,13 +124,14 @@ def SeriesAddView(request):
                 create_series.genre.add(*genre_list)
                 create_series.save()
 
+            messages.success(request, 'no error here 002')
             # Add seasons for the series
             seasons = data.get("seasons", [])
+            messages.success(request, 'no error here 003')
             for season_data in seasons:
                 season_number = season_data.get("season_number")
                 if season_number:
                     add_season(tmdb_id, season_number, org.tmdb_token)
-                    messages.success(request, 'no error here 002')
         else:
             messages.error(request, 'Request was not successful. Status code:', series_details.status_code)
 
