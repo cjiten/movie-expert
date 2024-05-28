@@ -80,9 +80,6 @@ def SeriesAddView(request):
                     except Genre.DoesNotExist:
                         genre = Genre.objects.create(genre_id=genre_id, name=genre_name)
                     genre_list.append(genre)
-        else:
-            # Request failed
-            messages.error(request, f"Request was not successful. Status code: {series_details.status_code}")
 
             # Check if the poster image already exists
             img_path = data["poster_path"]
@@ -134,6 +131,7 @@ def SeriesAddView(request):
                     add_season(tmdb_id, season_number, org.tmdb_token)
         else:
             messages.success(request, 'Request was not successful. Status code:', series_details.status_code)
+            messages.error(request, f"Request was not successful. Status code: {series_details.status_code}")
 
         messages.success(request, 'Series Created Successfully')
         return render(request, 'Tv/SeriesAddView.html')
