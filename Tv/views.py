@@ -63,6 +63,7 @@ def SeriesAddView(request):
         payload = ""
 
         series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
+        messages.success(request, 'Series Created Successfully', series_details)
         update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
 
         if series_details.status_code == 200:
@@ -184,7 +185,7 @@ def add_season(tmdb_id, season_number, tmdb_token):
             episode_data
             if episode_data:
                 add_episode(series, episode_data, season_number, tmdb_id)
-                
+
 
 def add_episode(series, episode_data, season_number, tmdb_id):
     season = get_object_or_404(Season, series=series, season_number=season_number)
