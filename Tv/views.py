@@ -62,7 +62,11 @@ def SeriesAddView(request):
 
         payload = ""
 
-        series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
+        try:
+            series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
+        except requests.exceptions.ConnectionError as err:
+            messages.error(request, f'Request was not successful. {err}')
+
         update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
 
         if series_details.status_code == 200:
