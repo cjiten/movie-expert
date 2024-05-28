@@ -63,6 +63,7 @@ def SeriesAddView(request):
         payload = ""
 
         series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
+        messages.success(request, 'no error here 001')
         update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
 
         if series_details.status_code == 200:
@@ -129,7 +130,7 @@ def SeriesAddView(request):
                 season_number = season_data.get("season_number")
                 if season_number:
                     add_season(tmdb_id, season_number, org.tmdb_token)
-                    messages.success(request, 'Request was successful. Status code:', series_details)
+                    messages.success(request, 'no error here 002')
         else:
             messages.error(request, 'Request was not successful. Status code:', series_details.status_code)
 
