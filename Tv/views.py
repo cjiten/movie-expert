@@ -62,7 +62,7 @@ def SeriesAddView(request):
 
         payload = ""
 
-        series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList, timeout=(5, 30), verify=False)
+        series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
         update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
 
         if series_details.status_code == 200:
@@ -130,8 +130,7 @@ def SeriesAddView(request):
                 if season_number:
                     add_season(tmdb_id, season_number, org.tmdb_token)
         else:
-            messages.success(request, 'Request was not successful. Status code:', series_details.status_code)
-            messages.error(request, f"Request was not successful. Status code: {series_details.status_code}")
+            messages.error(request, 'Request was not successful. Status code:', series_details.status_code)
 
         messages.success(request, 'Series Created Successfully')
         return render(request, 'Tv/SeriesAddView.html')
@@ -145,7 +144,7 @@ def add_season(tmdb_id, season_number, tmdb_token):
         "Authorization": f"Bearer {tmdb_token}"
     }
 
-    response = requests.get(reqUrl, headers=headersList, timeout=(5, 30), verify=False)
+    response = requests.get(reqUrl, headers=headersList)
     
     if response.status_code == 200:
         data = response.json()
@@ -185,6 +184,7 @@ def add_season(tmdb_id, season_number, tmdb_token):
             episode_data
             if episode_data:
                 add_episode(series, episode_data, season_number, tmdb_id)
+                
 
 def add_episode(series, episode_data, season_number, tmdb_id):
     season = get_object_or_404(Season, series=series, season_number=season_number)
