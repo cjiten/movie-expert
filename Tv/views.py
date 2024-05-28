@@ -8,7 +8,6 @@ from Tv.models import Series, Season, Episode
 
 import os
 import requests
-import time
 
 # Create your views here.
 
@@ -64,7 +63,6 @@ def SeriesAddView(request):
         payload = ""
 
         series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
-        messages.success(request, 'no error here 001')
         update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
 
         if series_details.status_code == 200:
@@ -127,10 +125,7 @@ def SeriesAddView(request):
 
             # Add seasons for the series
             seasons = data.get("seasons", [])
-            messages.success(request, 'no error here 002')
             for season_data in seasons:
-                messages.success(request, 'no error here 003')
-                time.sleep(5)
                 season_number = season_data.get("season_number")
                 if season_number:
                     add_season(tmdb_id, season_number, org.tmdb_token)
@@ -187,7 +182,6 @@ def add_season(tmdb_id, season_number, tmdb_token):
         episodes = data.get("episodes", [])
         for episode_data in episodes:
             episode_data
-            time.sleep(5)
             if episode_data:
                 add_episode(series, episode_data, season_number, tmdb_id)
 
