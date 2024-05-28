@@ -14,8 +14,8 @@ source env/bin/activate
 echo "Virtual env 'env' Activated !"
 
 # echo "Clearing Cache..."
-python manage.py clean_pyc
-python manage.py clear_cache
+# python manage.py clean_pyc
+# python manage.py clear_cache
 
 echo "Installing Dependencies..."
 pip install -r requirements.txt --no-input
