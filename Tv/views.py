@@ -63,7 +63,8 @@ def SeriesAddView(request):
         payload = ""
 
         series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
-        messages.success(request, 'Series Created Successfully', series_details)
+        messages.success(request, 'Request was successful. Status code:', series_details.status_code)
+        messages.success(request, 'Request was successful. Status code:', series_details.json())
         update_series = Series.objects.filter(tmdb_id=tmdb_id).first()
 
         if series_details.status_code == 200:
