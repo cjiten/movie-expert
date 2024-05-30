@@ -53,7 +53,7 @@ def SeriesAddView(request):
     if request.method == 'POST':
         tmdb_id = request.POST.get('tmdb_id')
 
-        reqUrl = f"http://api.themoviedb.org/3/tv/{tmdb_id}?language=en-US"
+        reqUrl = f"https://api.themoviedb.org/3/tv/{tmdb_id}?language=en-US"
 
         headersList = {
         "accept": "application/json",
@@ -142,7 +142,7 @@ def SeriesAddView(request):
     return render(request, 'Tv/SeriesAddView.html')
 
 def add_season(tmdb_id, season_number, tmdb_token):
-    reqUrl = f"http://api.themoviedb.org/3/tv/{tmdb_id}/season/{season_number}?language=en-US"
+    reqUrl = f"https://api.themoviedb.org/3/tv/{tmdb_id}/season/{season_number}?language=en-US"
     
     headersList = {
         "accept": "application/json",
