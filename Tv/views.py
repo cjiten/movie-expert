@@ -64,6 +64,7 @@ def SeriesAddView(request):
 
         try:
             series_details = requests.request("GET", reqUrl, data=payload,  headers=headersList)
+            messages.error(request, f'Request was successful. {series_details}')
         except requests.exceptions.ConnectionError as err:
             messages.error(request, f'Request was not successful. {err}')
 
